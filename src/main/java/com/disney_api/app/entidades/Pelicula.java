@@ -9,13 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Pelicula implements Serializable {
@@ -24,18 +23,19 @@ public class Pelicula implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idPelicula;
 	private String titulo;
-	@Temporal(TemporalType.DATE)
-	private Date fechaCreacion;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String fechaCreacion;
 	private Integer calificacion;
+	
 	
 	@OneToOne
 	private Imagen imagen;
 	
-	@ManyToMany
-	@JoinTable(name = "peliculaPersonaje", joinColumns = @JoinColumn(name = "idPelicula"), inverseJoinColumns = @JoinColumn(name = "id"))
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Personaje> personajes;
 
-	public Pelicula(Long idPelicula, String titulo, Date fechaCreacion, Integer calificacion, Imagen imagen,
+	public Pelicula(Long idPelicula, String titulo, String fechaCreacion, Integer calificacion, Imagen imagen,
 			List<Personaje> personajes) {
 		this.idPelicula = idPelicula;
 		this.titulo = titulo;
@@ -64,11 +64,11 @@ public class Pelicula implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public Date getFechaCreacion() {
+	public String getFechaCreacion() {
 		return fechaCreacion;
 	}
 
-	public void setFechaCreacion(Date fechaCreacion) {
+	public void setFechaCreacion(String fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 

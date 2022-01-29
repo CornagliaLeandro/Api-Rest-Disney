@@ -17,6 +17,7 @@ public class Genero implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String nombre; 
 	
 	@OneToOne
 	private Imagen imagen;
@@ -24,8 +25,9 @@ public class Genero implements Serializable {
 	@OneToMany
 	private List<Pelicula> peliculasAsociadas;
 
-	public Genero(Long id, Imagen imagen, List<Pelicula> peliculasAsociadas) {
+	public Genero(Long id,String nombre, Imagen imagen, List<Pelicula> peliculasAsociadas) {
 		this.id = id;
+		this.nombre = nombre;
 		this.imagen = imagen;
 		this.peliculasAsociadas = peliculasAsociadas;
 	}
@@ -55,6 +57,14 @@ public class Genero implements Serializable {
 
 	public void setPeliculasAsociadas(List<Pelicula> peliculasAsociadas) {
 		this.peliculasAsociadas = peliculasAsociadas;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	

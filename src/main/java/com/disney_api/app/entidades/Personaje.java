@@ -27,7 +27,7 @@ public class Personaje implements Serializable {
 	@OneToOne
 	private Imagen imagen;
 	
-	@ManyToMany(mappedBy = "personajes")
+	@OneToMany(cascade = CascadeType.PERSIST)
     private List<Pelicula> aparicion;
 	
 	public Personaje() {

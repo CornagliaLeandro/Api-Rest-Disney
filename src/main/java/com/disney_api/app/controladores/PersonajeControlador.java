@@ -52,14 +52,14 @@ public class PersonajeControlador {
 	}
 	
 	@PostMapping("/crear")
-	public Personaje crearPersonaje(@RequestBody Personaje personaje) throws Exception {
+	public void crearPersonaje(@RequestBody Personaje personaje) throws Exception {
 		
-		return  personajeServicio.crearPersonaje(personaje);
+		 personajeServicio.crearPersonaje(personaje);
 	}
 	
 	@PutMapping("/modificar")
-	public Personaje modificarPersonaje(@RequestBody Personaje personaje) throws Exception {
-		return personajeServicio.modificar(personaje);
+	public void modificarPersonaje(@RequestBody Personaje personaje) throws Exception {
+		 personajeServicio.modificar(personaje);
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
